@@ -4,10 +4,7 @@ import config from "../../../config";
 const prisma = new PrismaClient();
 
 const createAdmin = async (data: any) => {
-  const hashedPassword = await bcrypt.hash(
-    data.password,
- 12
-  );
+  const hashedPassword = await bcrypt.hash(data.password, 12);
 
   const userData = {
     email: data.admin.email,
@@ -16,7 +13,7 @@ const createAdmin = async (data: any) => {
   };
 
   const result = await prisma.$transaction(async (transactionClient) => {
-    const user = await transactionClient.user.create({
+    await transactionClient.user.create({
       data: userData,
     });
 
@@ -24,12 +21,19 @@ const createAdmin = async (data: any) => {
       data: data.admin,
     });
 
-    return { user, createdAdminData };
+    return createdAdminData;
   });
+
+  return result;
+};
+
+const getAllUsersFromDb = async () => {
+  const result = await prisma.user.findMany();
 
   return result;
 };
 
 export const userServices = {
   createAdmin,
+  getAllUsersFromDb,
 };
