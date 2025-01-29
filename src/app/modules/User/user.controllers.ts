@@ -19,13 +19,13 @@ const createAdmin = async (req: Request, res: Response) => {
   }
 };
 
-const getAllUser = async (req: Request, res: Response) => {
-  const result = await userServices.getAllUsersFromDb();
+const getAllAdmin = async (req: Request, res: Response) => {
+  const result = await userServices.getAllAdminFromDb();
 
   res.send(result);
 };
 
 export const userControllers = {
   createAdmin,
-  getAllUser,
+  getAllAdmin,
 };
