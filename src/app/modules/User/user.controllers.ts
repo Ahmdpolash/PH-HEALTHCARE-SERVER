@@ -13,8 +13,8 @@ const createAdmin = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: error?.name || "An error occurred while creating the admin",
-      error: error?.message,
+      // message: error?.name || "An error occurred while creating the admin",
+      // error: error?.message,
     });
   }
 };
